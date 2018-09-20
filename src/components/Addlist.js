@@ -1,6 +1,8 @@
 import React from "react";
 import "./Addlist.css";
-const leboncoin = require("leboncoin-api");
+// const leboncoin = require("leboncoin-api");
+import leboncoin from "leboncoin-api";
+import Adcard from "./Adcard";
 
 class Addlist extends React.Component {
   constructor(props) {
@@ -24,23 +26,17 @@ class Addlist extends React.Component {
 
   render() {
     if (this.state.products.length === 0) {
-      console.log(this.state);
       return <p>pas d'annonces dispo</p>;
     }
     console.log("2e passage dans le render");
 
-    return this.state.products.map(e => {
-      return (
-        <table>
-          <tbody>
-            <tr>
-              <td> {e.title}</td>
-              <td> {e.description}</td>
-            </tr>
-          </tbody>
-        </table>
-      );
-    });
+    return (
+      <div>
+        {this.state.products.map(ad => (
+          <Adcard key={ad.id} ad={ad} />
+        ))}
+      </div>
+    );
   }
 }
 
